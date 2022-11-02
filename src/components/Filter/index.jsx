@@ -1,8 +1,12 @@
 import Searchbar from '../Searchbar'
-export default function Filter() {
+import { motion } from 'framer-motion'
+export default function Filter({ containerChildrens }) {
     return (
-        <div className="flex">
+        <motion.div
+            className="flex"
+            variants={containerChildrens}
+        >
             <Searchbar />
-        </div>
+        </motion.div>
     )
 }

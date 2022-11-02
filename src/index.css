@@ -1,18 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
     html {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
     }
 }
 
 @layer components {
-    .bg {
-        @apply relative;
-        background-image: url("../../assets/bg-chad-montano-unsplash.jpg");
+    .hero-bg {
+        @apply absolute h-screen w-full bg-cover bg-right-top;
     }
 }
 
@@ -21,9 +23,13 @@
 }
 
 .hero-bg {
-    background-image: url('./assets/bg-chad-montano-unsplash.jpg');
+    background-image: url("./assets/hero-bg.jpg");
 }
 
-.hero-title {
-    max-width: 18ch;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 4px 0;
+  place-items: center;
+  overflow: hidden;
 }

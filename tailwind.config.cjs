@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
         backgroundImage: {
-            'hero-bg': "url('../../assets/bg-chad-montano-unsplash.jpg')"
-        }
+            'hero-bg': "url('https://unsplash.com/photos/z5bPsP916QA')"
+        },
     },
   },
   plugins: [],

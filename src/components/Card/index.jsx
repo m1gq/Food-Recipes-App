@@ -1,19 +1,53 @@
 import { motion } from 'framer-motion'
-export default function Card(props) {
+import { Link, useNavigate } from 'react-router-dom'
+import ReadyInMin from '../ReadyInMin'
+import TagItem from '../TagItem'
+const cardVariants = {
+    hidden: { opacity: 0, y: 100 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1.25,
+            ease: [.6, .01, -.05, .95],
+        }
+     }
+}
+
+export default function Card({ image, title, readyInMinutes, diets, dishTypes, isDragging, id }) {
+    const navigateTo = useNavigate()
+    const handleClick = event => {
+        if (!isDragging) {
+            navigateTo(`/recipes/${id}`)
+        }
+    }
+
     return (
-        <motion.div
-            className="relative h-84 w-96 overflow-hidden rounded-lg cursor-pointer shadow-md"
-        >
-            <motion.img
-                className="min-w-full object-cover "
-                src={props.image}
-                alt={props.title}
-                whileHover={{ scale: 1.1}}
-                transition={{ duration: .35 }}
-            />
-            <div className="absolute p-2 bottom-0 left-1/2 -translate-x-1/2">
-                <h3 className="text-sm py-1 px-2 bg-white w-max text-gray-900 font-medium rounded-md">{props.title}</h3>
-            </div>
-        </motion.div>
+        <div className="p-2">
+            <motion.div
+                className="relative w-80 md:w-96 cursor-pointer overflow-hidden"
+                variants={cardVariants}
+                onClick={handleClick}
+            >
+                <div className="overflow-hidden">
+                    <motion.img
+                            className="h-32 min-w-full object-cover "
+                            src={image}
+                            alt={`A pic of ${title}`}
+                            whileHover={{ scale: 1.04 }}
+                            transition={{ duration: .280, ease: "linear" }}
+                            draggable="false"
+                    />
+                </div>
+                <div className="overflow-hidden">
+                    <h3 className="text-x text-black font-semibold capitalize truncate select-none leading-loose">{title}</h3>
+                    <div className="flex items-center gap-2">
+                        <ReadyInMin readyInMinutes={readyInMinutes}/>
+                        <span className="font-bold">·</span>
+                        <TagItem tag={diets[0] ?? dishTypes[0] ?? "Unknown"}/>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
     )
 }

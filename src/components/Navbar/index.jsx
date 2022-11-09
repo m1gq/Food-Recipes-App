@@ -27,7 +27,7 @@ export default function Navbar() {
                     </motion.nav>
                     :
                     <motion.nav
-                       className={`flex fixed w-screen items-center gap-8 h-16 px-6 py-10 text-black z-40 bg-white transition duration-300 shadow`}
+                       className={`flex fixed w-screen items-center gap-8 h-16 px-6 py-10 text-black z-40 bg-white transition duration-300 shadow-lg`}
                     >
                       <Sidebar />
                       <Link to="/" className="absolute text-3xl font-bold left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>

@@ -13,27 +13,23 @@ const cardVariants = {
      }
 }
 
-export default function Card({ image, title, readyInMinutes, diets, dishTypes, isDragging, id }) {
+export default function Card({ image, title, children }) {
     const navigateTo = useNavigate()
-    const handleClick = event => {
-        if (!isDragging) {
-            navigateTo(`/recipes/${id}`)
-        }
-    }
+
 
     return (
-        <div className="p-2">
+        <div className="p-3 hover:bg-neutral-100 transition duration-200ms">
             <motion.div
                 className="relative w-80 md:w-96 cursor-pointer overflow-hidden"
                 variants={cardVariants}
-                onClick={handleClick}
+
             >
                 <div className="overflow-hidden">
                     <motion.img
-                            className="h-32 min-w-full object-cover "
+                            className="h-32 min-w-full object-cover object-center aspect-square bg-neutral-800"
                             src={image}
                             alt={`A pic of ${title}`}
-                            whileHover={{ scale: 1.04 }}
+                            whileHover={{ scale: 1.02 }}
                             transition={{ duration: .280, ease: "linear" }}
                             draggable="false"
                     />

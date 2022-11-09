@@ -1,27 +1,25 @@
 import { useState } from 'react'
+import SubMenu from './SubMenu'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { List, CaretRight, GithubLogo, DiscordLogo, LinkedinLogo, X } from 'phosphor-react'
 import { nanoid } from 'nanoid'
 
-const SubMenu = ({ arr }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  function handleOpen() {
-    setIsOpen(!isOpen)
+const nav = [
+  {
+    title: "Food Menus",
+    path: '/menu'
+  },
+  {
+    title: "What's in my Fridge?",
+    path: '/ingredients'
+  },
+  {
+    title: "About",
+    path: '/about'
   }
-  return (
-    <ul onClick={handleOpen} className="cursor-pointer text-neutral-900">
-      <span className="group flex text-xl items-center gap-1">Recipes <CaretRight size={12} weight="bold" className={`${isOpen ? 'rotate-90' : null} transition-all duration-300`}/></span>
-      { isOpen &&
-        arr.map(element =>
-          <li className="capitalize ml-1 mb-1">
-            Find by <Link to={`/recipes/s/sort=${element}`}>{element}</Link>
-          </li>)
-      }
-    </ul>
+]
 
-  )
-}
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false)
     const openMenu = () => setIsOpen(true)
@@ -57,9 +55,9 @@ export default function Sidebar() {
                     </div>
                     <ul className="flex flex-col gap-4">
                         <SubMenu arr={ ['popularity', 'healthiness', 'meta-score', 'time', 'random', 'max-used-ingredients'] }/>
-                        {["Contact", "About"].map(each => <li>
-                            <Link key={nanoid()} to="/details" className="flex text-xl items-center gap-1 text-neutral-900" onClick={closeMenu}>
-                                {each} <CaretRight size={12} color="#000" weight="bold" />
+                        {nav.map(({ title, path }) => <li>
+                            <Link key={path} to={path} className="flex text-xl items-center gap-1 text-neutral-900" onClick={closeMenu}>
+                                {title} <CaretRight size={12} color="#000" weight="bold" />
                             </Link>
                         </li>)}
                     </ul>

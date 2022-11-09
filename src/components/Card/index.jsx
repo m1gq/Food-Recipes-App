@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
-import ReadyInMin from '../ReadyInMin'
-import TagItem from '../TagItem'
+
 const cardVariants = {
     hidden: { opacity: 0, y: 100 },
     show: {
@@ -42,9 +41,7 @@ export default function Card({ image, title, readyInMinutes, diets, dishTypes, i
                 <div className="overflow-hidden">
                     <h3 className="text-x text-black font-semibold capitalize truncate select-none leading-loose">{title}</h3>
                     <div className="flex items-center gap-2">
-                        <ReadyInMin readyInMinutes={readyInMinutes}/>
-                        <span className="font-bold">·</span>
-                        <TagItem tag={diets[0] ?? dishTypes[0] ?? "Unknown"}/>
+                      { children }
                     </div>
                 </div>
             </motion.div>

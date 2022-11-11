@@ -98,7 +98,7 @@ export default function Home() {
                   <SectionCard title="Food Menu" subtitle="Discover Fast Food Restaurants & Food Chains Menu Items" img="https://images.unsplash.com/photo-1595531172949-30922c28a240?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/>
                 </Link>
               </div>
-
+              <SliderContainer />
             </div>
         </>
     )

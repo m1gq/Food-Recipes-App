@@ -8,20 +8,20 @@ const urls = {
   }
 export default function SliderContainer() {
     const { history } = useLocalStorage()
-    // <Slider title={"Taste Something New"} sort={"random"} />
-    // <Slider title={"Popular Among People"} sort={"popular"}  />
-    // <Slider title={"Healthy Food"} sort={"healthiness"} />
-    // { history &&
-    //     <Slider
-    //       title="Based on Your Last Search"
-    //       query={history[0].slice(history[0].lastIndexOf('/') + 1)}
-    //       sort="popular"
-    //       urlParam={urls[history[0].slice(history[0].indexOf('/') + 1, history[0].indexOf('/', 3))]}
-    //     />
-    // }
+    const title = history.includes('=') ? history.slice((history.indexOf("=") + 1)) : history.slice(history.lastIndexOf('/') + 1)
     return (
-        <>
-
-        </>
+        <div className="bg-gray-100">
+            { history.length > 0 &&
+                <Slider
+                  title="Based on Your Last Search"
+                  query={history[0][1]}
+                  sort="popular"
+                  urlParam={urls[history[0].slice(history[0].indexOf('/') + 1, history[0].indexOf('/', 1))]}
+                />
+            }
+            <Slider title={"Taste Something New"} sort={"random"} />
+            <Slider title={"Healthy Food"} sort={"healthiness"} />
+            <Slider title={"Popular Among People"} sort={"popularity"} />
+        </div>
     )
 }

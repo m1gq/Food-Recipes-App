@@ -3,8 +3,8 @@ import getRecipes from '../services/getRecipes'
 
 export default function useSingleFetch(foodID) {
     const { data, isLoading, isError, isFetching } = useQuery([`single-recipe`], () => {
-        return getRecipes(foodID + "/information?includeNutrition=false")
+        return getRecipes('recipes/' + foodID + "/information?includeNutrition=false")
     }, { refetchOnWindowFocus: false, refetchOnMount: false })
-
+    console.log(data);
     return { data, isLoading, isError, isFetching }
 }

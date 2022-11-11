@@ -18,7 +18,7 @@ const Searchbar = forwardRef(({ children, size = 50, path = 's/', placeholder = 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2" ref={ref}>
             <label className={`group flex items-center gap-2 bg-white hover:cursor-pointer focus-within:border-b-neutral-900 hover:border-b-neutral-900 p-3 w-90 md:w-96 font-xl border-b-2 border-t-2 border-transparent transition-all duration-100 `}>
-                <MagnifyingGlass size={24} className="text-black " weight="fill" />
+                <MagnifyingGlass size={24} className="text-black " weight="bold" />
                 <input className="outline-none text-gray-800 bg-transparent w-full h-full font-medium pl-4 hover:cursor-pointer focus:cursor-auto tracking-wider" placeholder={placeholder} value={searchQuery} onChange={handleInput}/>
             </label>
             { children }

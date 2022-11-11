@@ -3,24 +3,19 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import throttle from 'just-throttle'
 import getRecipes from '../services/getRecipes'
 
-export default function useFetch({ queryName, queryType, TOTAL_RESULTS }) {
+export default function useFetch({ queryName = "", querySort, TOTAL_RESULTS, url = "recipes/complexSearch"}) {
     const navigateTo = useNavigate()
     const [search, ] = useSearchParams()
-
-    const url = {
-        sort: `sort=${queryName}`,
-        query: `query=${queryName}`
-    }
-
-    const { data, isFetchingNextPage, fetchNextPage: fetchNewPage, isError, isLoading, refetch } = useInfiniteQuery([`${queryName}`], ({ pageParam = 0 }) => {
-        return getRecipes("complexSearch?" + url[queryType] + `&sort=${search.get('sort')}&diet=${search.get('diet')}&sortDirection=${search.get('direction')}&number=${TOTAL_RESULTS}&offset=${TOTAL_RESULTS * pageParam}` + "&addRecipeInformation=true&limitLicense=true")}, {
+    const { data, isFetchingNextPage, fetchNextPage: fetchNewPage, isError, isLoading, isRefetching, refetch } = useInfiniteQuery([`${queryName || querySort}`], ({ pageParam = 0 }) => {
+        return getRecipes(url + '?' + `query=${queryName}&number=${TOTAL_RESULTS}&offset=${TOTAL_RESULTS * pageParam}` + `&sort=${querySort || search.get('sort')}&sortDirection=${search.get('direction')}&diet=${search.get('diet')}` + "&addRecipeInformation=true&limitLicense=true&addMenuItemInformation=true")}, {
         refetchOnWindowFocus: false,
+        refetchOnMount: false,
         getNextPageParam: ((lastPage, allPages) => {
             const maxPages = lastPage.totalResults / TOTAL_RESULTS
             const nextPage = allPages.length
             return nextPage <= maxPages ? nextPage : undefined
         }),
-        cancelRefetch: false
+        cancelRefetch: false,
     })
 
     const fetchNextPage = throttle(() => {
@@ -30,5 +25,5 @@ export default function useFetch({ queryName, queryType, TOTAL_RESULTS }) {
     if (isError) {
         navigateTo('/errorpage')
     }
-    return { data, isFetchingNextPage, fetchNextPage, isLoading, refetch }
+    return { data, isFetchingNextPage, fetchNextPage, isLoading, isRefetching, refetch }
 }

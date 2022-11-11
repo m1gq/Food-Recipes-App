@@ -20,17 +20,25 @@ export default function Navbar() {
         <header >
             { itMatch && scrollHeight < SCROLL_HEIGHT ?
                 <motion.nav
-                    className={`flex fixed w-screen items-center gap-8 h-16 px-6 py-10 text-white z-40 bg-transparent transition duration-300`}
+                    className={`flex fixed w-screen items-center justify-between gap-8 h-16 py-10 px-4 md:px-8 text-white z-40 bg-transparent transition duration-300`}
                 >
-                    <Sidebar />
-                    <Link to="/" className="absolute text-3xl font-bold left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>
-                    </motion.nav>
-                    :
-                    <motion.nav
-                       className={`flex fixed w-screen items-center gap-8 h-16 px-6 py-10 text-black z-40 bg-white transition duration-300 shadow-lg`}
-                    >
+                    <div className="flex justify-center items-center gap-4">
                       <Sidebar />
-                      <Link to="/" className="absolute text-3xl font-bold left-1/2 -translate-x-1/2 md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>
+                      <Link to="/" className="text-2xl md:text-3xl font-bold md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>
+                    </div>
+                    <Link to="/recipes" className="py-2 px-4 bg-white text-black text-lg rounded-full transition-all duration-300">Find Food</Link>
+                    </motion.nav>
+
+                    :
+
+                    <motion.nav
+                       className={`flex fixed w-screen items-center justify-between gap-8 h-16 py-10 px-4 md:px-8 text-black z-40 bg-white transition duration-300`}
+                    >
+                      <div className="flex justify-center items-center gap-4">
+                        <Sidebar />
+                        <Link to="/" className="text-2xl md:text-3xl font-bold md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>
+                      </div>
+                      <Link to="/recipes" className="py-2 px-4 bg-black text-white text-lg rounded-full transition-all duration-300">Find Food</Link>
                 </motion.nav>
             }
         </header>

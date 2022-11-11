@@ -32,9 +32,9 @@ export default function Slider({ title, query, sort, urlParam }) {
     }
 
     return (
-        <div className="px-4 py-2">
+        <div className="pt-2">
 
-          <h3 className="my-4 pl-4 font-bold text-3xl text-neutral-900 text-center md:text-left rounded tracking-wide">{title}</h3>
+          <h3 className="my-4 font-bold text-3xl text-neutral-900 text-center md:text-left rounded tracking-wide px-4">{title}</h3>
             { isLoading ? <h1>Loading...</h1> :
               <motion.div layout className="flex items-center overflow-hidden min-w-screen p-2 rounded" ref={sliderContainer}>
                 <motion.div
@@ -51,13 +51,23 @@ export default function Slider({ title, query, sort, urlParam }) {
                     viewport={{ once: true }}
                 >
                     {data?.pages?.map(page =>
-                        page?.results || page.menuItems.map(plate =>
+                        page?.results.map(plate =>
+                          <Link to={!isDragging && `recipes/${plate.id}`} draggable="false">
+                            <Card key={plate.id} {...plate} >
+                              <ReadyInMin readyInMinutes={plate.readyInMinutes}/>
+                              <span className="font-bold">·</span>
+                              <TagItem tag={plate.diets[0] ?? plate.dishTypes[0] ?? "Unknown"}/>
+                            </Card>
+                          </Link>
+                        ) ??
+                        page?.menuItems.map(plate =>
                           <Link to={!isDragging && `recipes/${plate.id}`} draggable="false">
                             <Card key={plate.id} {...plate} />
                           </Link>
-                        ))
+                        )
+                      )
                     }
-                    <Link to={query ? `${history[0]}` : `/recipes/s/sort=${sort}`} className="w-max p-4 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white ml-4">Load More</Link>
+                    <Link to={query ? `${history[0][0]}` : `/recipes/s/sort=${sort}`} className="w-max p-4 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white ml-4">Load More</Link>
 
                 </motion.div>
               </motion.div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,13 +8,13 @@
 @layer base {
     html {
         font-family: 'Poppins', sans-serif;
-        scroll-behavior: smooth;
+
     }
 }
 
 @layer components {
     .hero-bg {
-        @apply absolute h-screen w-full bg-cover bg-right-top;
+        @apply absolute h-screen w-full bg-cover bg-center bg-black/20 bg-blend-darken;
     }
 }
 
@@ -32,4 +32,24 @@
   gap: 4px 0;
   place-items: center;
   overflow: hidden;
+}
+
+.card:nth-child(5n + 1) img {
+    background-color: rgb(241, 230, 37);
+}
+
+.card:nth-child(5n + 2) img {
+    background-color: rgb(5, 190, 152);
+}
+
+.card:nth-child(5n + 3) img {
+    background-color: rgba(128, 76, 249, 1);
+}
+
+.card:nth-child(5n + 4) img {
+    background-color: #d2ffdc;
+}
+
+.card:nth-child(5n + 5) img {
+    background-color: rgb(49, 74, 230);
 }

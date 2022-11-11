@@ -5,7 +5,7 @@ export default function TagItem({ tag, hasMoreTags = false }) {
     }
     else {
       return (
-          <span className="capitalize text-black">{tag}</span>
+          <span className="capitalize">{tag}</span>
       )
     }
 

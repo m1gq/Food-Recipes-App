@@ -32,11 +32,11 @@ export default function Navbar() {
                     :
 
                     <motion.nav
-                       className={`flex fixed w-screen items-center justify-between gap-8 h-16 py-10 px-4 md:px-8 text-black z-40 bg-white transition duration-300`}
+                       className={`flex fixed w-screen items-center justify-between gap-8 h-16 py-10 px-4 md:px-8 text-black z-40 bg-zinc-50 transition duration-300`}
                     >
                       <div className="flex justify-center items-center gap-4">
                         <Sidebar />
-                        <Link to="/" className="text-2xl md:text-3xl font-bold md:relative md:left-0 md:-translate-x-0 tracking-wide">Foodinary</Link>
+                        <Link to="/" className="text-2xl md:text-3xl font-bold md:relative md:left-0 md:-translate-x-0 tracking-wide ">Foodinary</Link>
                       </div>
                       <Link to="/recipes" className="py-2 px-4 bg-black text-white text-lg rounded-full transition-all duration-300">Find Food</Link>
                 </motion.nav>

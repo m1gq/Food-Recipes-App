@@ -10,41 +10,50 @@ import Card from '../../../components/Card'
 import Visor from '../../../components/Visor'
 import ReadyInMin from '../../../components/ReadyInMin'
 import TagItem from '../../../components/TagItem'
+import Sort from '../../../components/Sort'
 import useLocalStorage from '../../../hooks/useLocalStorage'
+import { SortAscending, FunnelSimple, ForkKnife, Recycle } from 'phosphor-react'
 import { Helmet } from 'react-helmet'
 import { BarLoader } from 'react-spinners';
 export default function FoodRecipes() {
     const { plates } = useParams()
     const query = plates.slice((plates.indexOf("=") + 1))
     const requestedQuery = plates.includes("sort")
-    const { data, isFetchingNextPage, fetchNextPage, isLoading, isRefetching, refetch} = useFetch({ queryName: requestedQuery ? "" : query , querySort: requestedQuery ? query : "", TOTAL_RESULTS: 10, url: 'recipes/complexSearch' })
+    const { data, isLoading, isRefetching, refetch, fetchNextPage, isFetchingNextPage } = useFetch({
+      queryName: requestedQuery ? `` : query,
+      querySort: requestedQuery ? `sort=${query}` : null,
+      url: 'recipes/complexSearch?query=',
+      TOTAL_RESULTS: 10
+    })
     useLocalStorage(data)
     return (
         <main className="pt-20">
           <Helmet>
-            <title>Foodinary · {query.slice(0, 1).toUpperCase().concat(query.slice(1))}</title>
+            <title>Foodinary · Results for Best {query.slice(0, 1).toUpperCase().concat(query.slice(1))} Recipes</title>
             <meta name="Food Recipes" content={"Results for" + query} />
           </Helmet>
           <Dropdown refetch={refetch}>
-            <DropdownItem refetch={refetch} title='sort' arr={['popularity', 'healthiness', 'meta-score', 'time', 'random', 'max used ingredients']} />
-            <DropdownItem refetch={refetch} title='direction' arr={['asc', 'desc']} />
-            <DropdownItem refetch={refetch} title='diet' arr={['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'ovo-vegetarian', 'vegan', 'pescetarian']} />
+            <DropdownItem refetch={refetch} title='sort' arr={['popularity', 'healthiness', 'meta-score', 'time', 'random', 'max used ingredients']} icon={ <FunnelSimple className="text-black h-6 w-6" /> }/>
+            <DropdownItem refetch={refetch} title='diet' arr={['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'ovo-vegetarian', 'vegan', 'pescetarian']} icon={ <ForkKnife className="text-black h-6 w-6" /> }/>
+            <Sort refetch={refetch} />
           </Dropdown>
+          { (isLoading || isRefetching ) && <BarLoader height={4} width="100%" color="rgb(33, 34, 37)" className="top-0 z-30" cssOverride={{ position: "fixed "}}/> }
           <CardWrapper>
-              {(isLoading || isRefetching ) ? <BarLoader height={4} width="100%" color="rgb(72, 127, 251)" className="top-20 z-30" cssOverride={{ position: "fixed "}}/> :
-                  data?.pages.flatMap(page =>
-                      page.results.map(plate =>
-                          <Link to={`${plate.id}`} key={plate.id}>
-                              <Card key={plate.id} title={plate.title} image={plate.image}>
-                                <ReadyInMin readyInMinutes={plate.readyInMinutes}/>
-                                <span className="font-bold">·</span>
-                                <TagItem tag={plate.diets[0] ?? plate.dishTypes[0] ?? "Unknown"}/>
-                              </Card>
-                          </Link>
+              {
+                  data?.pages?.flatMap(page =>
+                      page?.results?.map(plate =>
+                          <Card key={plate?.id} title={plate?.title} image={plate?.image}>
+                            <div className="flex items-center gap-2">
+                              <p>{plate?.readyInMinutes} Minutes</p>
+                              <span className="font-bold">·</span>
+                              <TagItem tag={plate.dishTypes[0] ?? plate.diets[0] ?? ''} className="capitalize"/>
+                            </div>
+                          </Card>
                       ))
               }
           </CardWrapper>
           <Visor fetchNextPage={fetchNextPage} isFetchingNextPage={isFetchingNextPage}/>
+
         </main>
     )
 }

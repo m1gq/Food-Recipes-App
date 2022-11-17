@@ -7,7 +7,10 @@
 @layer base {
     html {
         font-family: 'Poppins', sans-serif;
+    }
 
+    body {
+      min-height: 100vh;
     }
 }
 
@@ -27,11 +30,11 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 4px 0;
-  place-items: center;
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 14px;
 }
+
+
 
 .card:nth-child(5n + 1) img {
     background-color: rgb(241, 230, 37);

@@ -1,11 +1,12 @@
-export default function TagItem({ tag, hasMoreTags = false }) {
+export default function TagItem({ tag, hasMoreTags = false, className }) {
+    const reducedArr = tag.slice(0, 2)
     if (hasMoreTags) {
-      const tagsElement = tag.map(element => <li key={element} className="py-1 px-3 bg-neutral-200 rounded-full capitalize text-neutral-900">{element}</li>)
+      const tagsElement = reducedArr.map(element => <li key={element} className="py-1 px-3 bg-white rounded-full capitalize text-black font-medium">{element}</li>)
       return [ tagsElement ]
     }
     else {
       return (
-          <span className="capitalize">{tag}</span>
+          <span className={`${className}`}>{tag}</span>
       )
     }
 

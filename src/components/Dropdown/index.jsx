@@ -1,21 +1,16 @@
 import Searchbar from '../Searchbar'
+import ClearFilter from '../ClearFilter'
+import Sort from '../Sort'
 import { useSearchParams } from 'react-router-dom'
 export default function Dropdown({ children, refetch }) {
   const [, setSearch] = useSearchParams()
-  function removeFilters() {
-    setSearch('')
-    setTimeout(() => {
-      refetch()
-    }, 100)
-  }
   return (
-    <div className="sticky top-20 left-0 flex items-center justify-around flex-wrap mb-4 p-2 z-30 bg-neutral-50 shadow cursor-pointer">
-      <Searchbar size={32}/>
-      <div className="flex gap-4">
+    <div className="fixed top-20 left-0 w-full md:sticky md:top-20 z-30 bg-zinc-50/90 backdrop-blur">
+      <div className="flex justify-center items-center p-2">
         { children }
-        <button onClick={removeFilters}>Clear filter</button>
-      </div>
 
+        <ClearFilter refetch={refetch}/>
+      </div>
     </div>
   )
 }

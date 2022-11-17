@@ -5,8 +5,10 @@ export default function useLocalStorage(data) {
   const { pathname } = useLocation()
   useEffect(() => {
     // Check if the requested query exist to prevent saving bad queries
-    if (data) {
-      localStorage.setItem('history-search', JSON.stringify([...new Set([pathname, ...history ])]))
+    if (history.length < 3) {
+      if (data?.length > 0) {
+        localStorage.setItem('history-search', JSON.stringify([...new Set([pathname, ...history ])]))
+      }
     }
   }, [data, pathname])
   return { history }

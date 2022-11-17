@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Searchbar from '../../components/Searchbar'
 import Slider from '../../components/Slider'
 import { Helmet } from 'react-helmet'
 import '../../index.css'
-export default function Recipes() {
+export default function Recipes(props) {
+  const test = useLocation()
+  console.log(test);
   return (
     <main className="pt-20">
       <Helmet>

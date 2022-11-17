@@ -4,12 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { List, CaretRight, GithubLogo, DiscordLogo, LinkedinLogo, X } from 'phosphor-react'
 import { nanoid } from 'nanoid'
-
+import Searchbar from '../../Searchbar'
 const nav = [
-  {
-    title: "Food Menus",
-    path: '/menu'
-  },
   {
     title: "What's in my Fridge?",
     path: '/ingredients'
@@ -49,10 +45,12 @@ export default function Sidebar() {
                         { transition: "linear", duration: .350 }
                     }
                 >
+
                     <div className="flex items-center gap-8 ">
                         <X size={24} weight="bold" className="cursor-pointer text-neutral-900" onClick={closeMenu}/>
                         <Link to="/" className="text-3xl text-neutral-900 font-bold tracking-wide" onClick={closeMenu}>Foodinary</Link>
                     </div>
+                    <Searchbar />
                     <ul className="flex flex-col gap-4">
                         <SubMenu arr={ ['popularity', 'healthiness', 'meta-score', 'time', 'random', 'max-used-ingredients'] }/>
                         {nav.map(({ title, path }) => <li>
@@ -61,6 +59,7 @@ export default function Sidebar() {
                             </Link>
                         </li>)}
                     </ul>
+
                     <div className="mt-auto">
                         <ul className="flex gap-8 justify-center">
                             <li className="flex text-neutral-900"><Link><GithubLogo size={28} color="#000" weight="bold" className="mx-auto "/> Github</Link></li>

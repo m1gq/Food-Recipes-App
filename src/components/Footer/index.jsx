@@ -3,13 +3,8 @@ import { List, CaretRight, GithubLogo, DiscordLogo, LinkedinLogo, X } from 'phos
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex-col items-center justify-center h-40 bg-neutral-900 text-white p-4">
-      
-      <ul className="flex gap-8 justify-center">
-        <li className="flex"><Link><GithubLogo size={28} color="#fff" weight="bold" className="mx-auto"/> Github</Link></li>
-        <li className="flex"><Link><DiscordLogo size={28} color="#fff" weight="bold" className="mx-auto"/> Discord</Link></li>
-        <li className="flex"><Link><LinkedinLogo size={28} color="#fff" weight="bold" className="mx-auto"/> LinkedIn</Link></li>
-      </ul>
+    <footer className="relative bottom-0 mt-auto flex items-center justify-center  bg-neutral-900 text-white p-4">
+      <Link to="/" className="text-3xl font-bold tracking-wide">Foodinary</Link>
     </footer>
   )
 }

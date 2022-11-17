@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Searchbar from '../../components/Searchbar'
 import SectionCard from './SectionCard'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import SectionCardWrapper from '../../components/CardWrapper'
 import SliderContainer from '../../components/SliderContainer'
+import Slider from '../../components/Slider'
+import TestimonialCard from '../../components/TestimonialCard'
 import { motion, AnimatePresence } from 'framer-motion'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { Helmet } from 'react-helmet'
 
 const container = {
@@ -14,16 +17,16 @@ const container = {
         opacity: 1,
         transition: {
             duration: .75,
-            staggerChildren: .2,
-
-        }
+            when: "beforeChildren",
+            staggerChildren: .125,
+        },
     }
 }
 
 const containerChildrens = {
     hidden: {
         opacity: 0,
-        y: 150
+        y: 100
     },
     show: {
         opacity: 1,
@@ -38,6 +41,7 @@ const MotionSearchbar = motion(Searchbar)
 
 export default function Home() {
     const { history, title } = useLocalStorage()
+    const { pathname } = useLocation()
 
     return (
         <>
@@ -55,7 +59,6 @@ export default function Home() {
                     transition={{
                       duration: .5,
                       ease: [.6, .01, -.05, .95],
-                      when: "beforeChildren"
                     }}
                 >
                     <motion.div
@@ -70,10 +73,11 @@ export default function Home() {
                         >
                             Homemade Recipes For You
                         </motion.h1>
+
                         <MotionSearchbar variants={ containerChildrens } path='recipes/s/'><button className="bg-neutral-900 hover:bg-neutral-800 focus:bg-neutral-800 text-white font-medium px-4 py-2 text-xl tracking-tight transition duration-300">Find Food</button></MotionSearchbar>
                         { history.length > 0 &&
                           <motion.p
-                            className="text-white text-center md:text-left font-regular mt-1 space-x-2"
+                            className="text-white text-center md:text-left font-regular mt-1 space-x-2 truncate"
                             variants={ containerChildrens }
                             >Recent Searches {history.map(search => {
                               const title = search.includes('=') ? search.slice((search.indexOf("=") + 1)) : search.slice(search.lastIndexOf('/') + 1)
@@ -87,18 +91,24 @@ export default function Home() {
                 </motion.div>
             </div>
             <div>
-              <div className="grid md:grid-cols-3 gap-8 px-8 py-[2rem]">
-                <Link to='/recipes'>
+              <div className="grid md:grid-cols-2 gap-4 px-4 py-4">
+                <Link to='/recipes' state={{ from: pathname }}>
                   <SectionCard title="Discover New Food" subtitle="Search Categories" img="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" />
                 </Link>
                 <Link to='/ingredients'>
-                  <SectionCard title="What's In My Fridge?" subtitle="Find Food based on What is in Your Fridge" img="https://images.unsplash.com/photo-1536353284924-9220c464e262?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"/>
-                </Link>
-                <Link to='/menu'>
-                  <SectionCard title="Food Menu" subtitle="Discover Fast Food Restaurants & Food Chains Menu Items" img="https://images.unsplash.com/photo-1595531172949-30922c28a240?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/>
+                  <SectionCard title="What's In My Fridge?" subtitle="Search by Ingredients" img="https://images.unsplash.com/photo-1580116270858-8a0d62b15426?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=788&q=80"/>
                 </Link>
               </div>
               <SliderContainer />
+              <section>
+                  <ScrollContainer
+                    className="bg-zinc-900 px-2 md:px-8 flex items-center justify-between gap-20 cursor-[grab] h-[60vh]"
+                    draggingClassName="cursor-[grabbing]"
+                    vertical={false}
+                  >
+                    <TestimonialCard />
+                  </ScrollContainer>
+              </section>
             </div>
         </>
     )

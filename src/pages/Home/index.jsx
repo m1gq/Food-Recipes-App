@@ -100,15 +100,6 @@ export default function Home() {
                 </Link>
               </div>
               <SliderContainer />
-              <section>
-                  <ScrollContainer
-                    className="bg-zinc-900 px-2 md:px-8 flex items-center justify-between gap-20 cursor-[grab] h-[60vh]"
-                    draggingClassName="cursor-[grabbing]"
-                    vertical={false}
-                  >
-                    <TestimonialCard />
-                  </ScrollContainer>
-              </section>
             </div>
         </>
     )

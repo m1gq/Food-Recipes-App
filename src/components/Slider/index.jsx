@@ -52,7 +52,7 @@ export default function Slider({ title, query, sort, urlParam }) {
                 >
                     {data?.pages?.map(page =>
                         page?.results?.map(plate =>
-                            <div className="w-80 md:w-96">
+                            <div className="w-80 md:w-96" key={plate?.id}>
                               <Card title={plate?.title} image={plate?.image} id={plate?.id} isDragging={isDragging}>
                                 <ReadyInMin readyInMinutes={plate.readyInMinutes}/>
                                 <span className="font-bold">·</span>

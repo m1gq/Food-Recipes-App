@@ -1,8 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, Outlet } from 'react-router-dom'
 import useScrollToTop from './hooks/useScrollToTop'
-const Layout = lazy(() => import('./pages/Layout'))
-const Home = lazy(() => import('./pages/Home'))
+import Home from './pages/Home'
+import Layout from './pages/Layout'
 const Details = lazy(() => import('./pages/Details'))
 const Recipes = lazy(() => import('./pages/Recipes'))
 const FoodRecipes = lazy(() => import('./pages/Recipes/FoodRecipes'))

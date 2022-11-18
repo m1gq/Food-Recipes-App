@@ -8,7 +8,6 @@ import SliderContainer from '../../components/SliderContainer'
 import Slider from '../../components/Slider'
 import TestimonialCard from '../../components/TestimonialCard'
 import { motion, AnimatePresence } from 'framer-motion'
-import ScrollContainer from 'react-indiana-drag-scroll'
 import { Helmet } from 'react-helmet'
 
 const container = {

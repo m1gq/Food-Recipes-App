@@ -37,14 +37,14 @@ export default function FoodRecipes() {
             <DropdownItem refetch={refetch} title='diet' arr={['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'ovo-vegetarian', 'vegan', 'pescetarian']} icon={ <ForkKnife className="text-black h-6 w-6" /> }/>
             <Sort refetch={refetch} />
           </Dropdown>
-          { (isLoading || isRefetching ) && <BarLoader height={4} width="100%" color="rgb(33, 34, 37)" className="top-0 z-30" cssOverride={{ position: "fixed "}}/> }
+          { (isLoading || isRefetching ) && <BarLoader height={4} width="100%" color="rgb(33, 34, 37)" className="top-0 z-50" cssOverride={{ position: "fixed "}}/> }
           <CardWrapper>
               {
                   data?.pages?.flatMap(page =>
                       page?.results?.map(plate =>
-                          <Card key={plate?.id} title={plate?.title} image={plate?.image}>
+                          <Card key={plate.id} title={plate.title} image={plate.image} id={plate.id}>
                             <div className="flex items-center gap-2">
-                              <p>{plate?.readyInMinutes} Minutes</p>
+                              <p>{plate.readyInMinutes} Minutes</p>
                               <span className="font-bold">·</span>
                               <TagItem tag={plate.dishTypes[0] ?? plate.diets[0] ?? ''} className="capitalize"/>
                             </div>

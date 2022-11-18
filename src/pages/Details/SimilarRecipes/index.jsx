@@ -5,15 +5,15 @@ export default function SimilarRecipes({ foodID }) {
   return (
     <>
       { isLoading ? <h1>Loading...</h1> :
-          <div>
+          <div className="w-full">
               <h3 className="text-3xl capitalize text-neutral-800 mb-3">Similar Recipes</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                   {
-                      data.map(plate =>
+                      data?.map(plate =>
                           <Link to={`../${plate.id}`} key={plate.id} className="relative w-full">
-                          <div className="overflow-hidden">
+                          <div >
                             <img
-                              className="block h-40 w-full  object-cover rounded"
+                              className="block h-40 w-full object-cover rounded"
                               src={`https://spoonacular.com/recipeImages/${plate.id}-556x370.jpg`}
                               alt={`A pic of ${plate.title}`}
                             />

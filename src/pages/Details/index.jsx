@@ -32,8 +32,12 @@ export default function Details() {
                     <div className="absolute bottom-0 left-0 bg-gradient-to-b from-transparent to-black/70 px-4 pt-8 pb-4 min-w-full">
 
                       <ul className="flex justify-center md:justify-start gap-2 flex-wrap mt-auto">
-                          <TagItem tag={ food?.dishTypes[0] } className="py-1 px-3 bg-white rounded-full capitalize text-black font-medium" />
-                          <TagItem tag={ food?.diets[0] } className="py-1 px-3 bg-white rounded-full capitalize text-black font-medium" />
+                          { food.dishTypes && food.diets &&
+                            <>
+                              <TagItem tag={ food?.dishTypes[0]} className="py-1 px-3 bg-white rounded-full capitalize text-black font-medium" />
+                              <TagItem tag={ food?.diets[0] } className="py-1 px-3 bg-white rounded-full capitalize text-black font-medium" />
+                            </>
+                          }
                       </ul>
                     </div>
                 </div>
@@ -42,14 +46,14 @@ export default function Details() {
                     <div className="flex items-center gap-8 md:w-80 text-neutral-700 py-2">
                     <span className="inline-flex items-center gap-1">
                       <Clock className="text-black" weight="regular" />
-                      <ReadyInMin readyInMinutes={food.readyInMinutes}/>
+                      <ReadyInMin readyInMinutes={food?.readyInMinutes}/>
                     </span>
-                    <span className="inline-flex items-center gap-1"><CheckCircle className="text-green-500" weight="regular" /> Health Score: {food.healthScore}</span>
+                    <span className="inline-flex items-center gap-1"><CheckCircle className="text-green-500" weight="regular" /> Health Score: {food?.healthScore}</span>
                     </div>
 
 
                     <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-2">
-                        <Information title="Ingredients" arr={food.extendedIngredients} />
+                        <Information title="Ingredients" arr={food?.extendedIngredients} />
                         <SimilarRecipes foodID={foodID}/>
                     </div>
 

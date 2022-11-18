@@ -9,7 +9,7 @@ const urls = {
 
 export default function SliderContainer() {
     const { history } = useLocalStorage()
-    const title = history[0].includes('=') ? history[0].slice((history[0].indexOf("=") + 1)) : history[0].slice(history[0].lastIndexOf('/') + 1)
+    const title = history[0]?.includes('=') ? history[0]?.slice((history[0]?.indexOf("=") + 1)) : history[0]?.slice(history[0]?.lastIndexOf('/') + 1)
     return (
         <div>
           { history.length > 0 &&

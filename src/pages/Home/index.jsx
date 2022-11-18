@@ -8,6 +8,7 @@ import SliderContainer from '../../components/SliderContainer'
 import Slider from '../../components/Slider'
 import TestimonialCard from '../../components/TestimonialCard'
 import { motion, AnimatePresence } from 'framer-motion'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { Helmet } from 'react-helmet'
 
 const container = {
@@ -99,6 +100,15 @@ export default function Home() {
                 </Link>
               </div>
               <SliderContainer />
+              <section>
+                  <ScrollContainer
+                    className="bg-zinc-900 px-2 md:px-8 flex items-center justify-between gap-20 cursor-[grab] h-[60vh]"
+                    draggingClassName="cursor-[grabbing]"
+                    vertical={false}
+                  >
+                    <TestimonialCard />
+                  </ScrollContainer>
+              </section>
             </div>
         </>
     )

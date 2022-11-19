@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Link, useMatch } from 'react-router-dom'
 import Sidebar from './Sidebar'
-import ActiveLink from '../ActiveLink'
 import Searchbar from '../Searchbar'
 import useScrollObserver from '../../hooks/useScrollObserver'
 
